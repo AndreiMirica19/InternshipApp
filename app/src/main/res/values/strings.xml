@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">InternshipSignInContractApp</string>
+    <string name="login">LogIn</string>
+    <string name="sign_up">Sign up</string>
+    <string name="email">Email</string>
+    <string name="account_type">Account Type</string>
+    <string name="forgot_password">forgot password?</string>
+    <string name="update_profile">Update profile</string>
+    <string name="sign_convention">Sign Convention</string>
+    <string name="log_out">Log Out</string>
+    <string name="search">Search</string>
+
+    <string name="type_name_of_companies">Type name of companies</string>
+    <string name="home">Home</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="attach_cv">Attach cv</string>
+</resources>
