@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:fontFamily="@font/fredokaone_regular"
             android:layout_height="wrap_content"
+            android:id="@+id/username"
             android:textColor="@color/text_Color"
             android:drawableEnd="@drawable/ic_username"
             />
@@ -58,6 +59,7 @@
             android:fontFamily="@font/fredokaone_regular"
             android:layout_height="wrap_content"
             android:textColor="@color/text_Color"
+            android:id="@+id/password"
             android:drawableEnd="@drawable/ic_baseline_lock_24"
             />
 
@@ -70,6 +72,7 @@
         android:fontFamily="@font/fredokaone_regular"
         android:textSize="20dp"
         android:clickable="true"
+        android:onClick="ForgotPassword"
         app:layout_constraintTop_toBottomOf="@id/textLayout2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,6 +87,7 @@
         android:text="@string/login"
         android:backgroundTint="@color/button_Color"
         app:icon="@drawable/ic_login"
+        android:onClick="LogInPressed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/forgot"
@@ -96,6 +100,7 @@
         android:id="@+id/signUp_btn"
      android:backgroundTint="@color/button_Color"
         android:text="@string/sign_up"
+        android:onClick="SignUpPressed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_btn"

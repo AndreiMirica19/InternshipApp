@@ -14,4 +14,6 @@
     <string name="home">Home</string>
     <string name="edit_profile">Edit profile</string>
     <string name="attach_cv">Attach cv</string>
+
+    <string name="recover_account">Recover account</string>
 </resources>

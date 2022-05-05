@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:background="#F2D0A4"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SignUp"
     >
     <TextView
         android:layout_width="match_parent"
@@ -115,4 +116,19 @@
             />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Already user ? Press here"
+        android:textSize="20dp"
+        android:textColor="@color/text_Color"
+        android:fontFamily="@font/fredokaone_regular"
+        app:layout_constraintTop_toBottomOf="@id/menu"
+        android:clickable="true"
+        android:onClick="alreadyUserBtnPressed"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
