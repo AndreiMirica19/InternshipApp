@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_search.xml" value="0.2125" />
         <entry key="app/src/main/res/drawable/ic_signup.xml" value="0.207" />
+        <entry key="app/src/main/res/layout/account_type.xml" value="0.5489191125940394" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17835083007812502" />
         <entry key="app/src/main/res/layout/edit_account_student.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/layout/forgot_password.xml" value="0.2875905797101449" />

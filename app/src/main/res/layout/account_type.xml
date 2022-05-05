@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:layout_width="match_parent"
+    android:fontFamily="@font/fredokaone_regular"
+    android:layout_height="wrap_content"
+    android:textColor="@color/text_Color"
+    android:id="@+id/email_input"
+
+    android:textSize="20sp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

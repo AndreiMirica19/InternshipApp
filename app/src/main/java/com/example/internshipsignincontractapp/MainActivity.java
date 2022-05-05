@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Button logInButton;
     private Intent loginIntent;
     private Intent signUpIntent;
-    private DbConnector dbConnector;
+    public static  DbConnector dbConnector;
     private TextInputEditText username;
     private TextInputEditText password;
     @Override

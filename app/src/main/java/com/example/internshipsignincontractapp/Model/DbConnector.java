@@ -16,6 +16,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DbConnector {
@@ -44,6 +45,14 @@ public class DbConnector {
 
 
 
+    }
+    public void addUser(Users user){
+        DocumentReference newUser = db.collection("Students").document();
+        HashMap <String,String>userMap = new HashMap();
+        userMap.put("name",user.name);
+        userMap.put("password",user.password);
+        userMap.put("email",user.email);
+        db.collection("Students").add(userMap);
     }
     public Boolean credentialsValidator(String username,String password){
         for( Users u :UserList) {

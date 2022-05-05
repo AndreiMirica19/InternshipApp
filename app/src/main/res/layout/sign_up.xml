@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/text_Color"
             android:drawableEnd="@drawable/ic_username"
+            android:id="@+id/usernameInput"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -59,6 +60,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/text_Color"
             android:drawableEnd="@drawable/ic_baseline_lock_24"
+            android:id="@+id/PasswordInput"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -91,6 +93,7 @@
         android:id="@+id/signUp_btn"
         android:backgroundTint="@color/button_Color"
         android:text="@string/sign_up"
+        android:onClick="SignUpPressed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/menu"
@@ -99,7 +102,7 @@
         />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/menu"
-
+        android:fontFamily="@font/fredokaone_regular"
        android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
@@ -113,6 +116,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
+            android:fontFamily="@font/fredokaone_regular"
+            android:id="@+id/acc_input"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
