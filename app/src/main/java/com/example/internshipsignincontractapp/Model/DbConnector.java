@@ -46,13 +46,13 @@ public class DbConnector {
 
 
     }
-    public void addUser(Users user){
+    public void addUser(Users user,String accountType){
         DocumentReference newUser = db.collection("Students").document();
         HashMap <String,String>userMap = new HashMap();
         userMap.put("name",user.name);
         userMap.put("password",user.password);
         userMap.put("email",user.email);
-        db.collection("Students").add(userMap);
+        db.collection(accountType+"s").add(userMap);
     }
     public Boolean credentialsValidator(String username,String password){
         for( Users u :UserList) {

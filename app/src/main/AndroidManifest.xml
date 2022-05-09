@@ -22,6 +22,9 @@
         <activity android:name=".LogedInActivity"/>
         <activity android:name=".SignUp"/>
         <activity android:name=".RecoverAccount"/>
+        <activity android:name=".MainPageAdmin"/>
+        <activity android:name=".MainPageMentor"/>
+        <activity android:name=".MainPageCompany"/>
     </application>
 
 </manifest>

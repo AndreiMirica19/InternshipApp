@@ -16,4 +16,9 @@
     <string name="attach_cv">Attach cv</string>
 
     <string name="recover_account">Recover account</string>
+    <string name="update_firm">Update firm</string>
+    <string name="category">Category</string>
+    <string name="add_a_description">Add a description</string>
+    <string name="create_account">Create account</string>
+    <string name="see_status">See status</string>
 </resources>

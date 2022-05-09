@@ -75,6 +75,19 @@
         app:icon="@drawable/ic_baseline_attach_file_24"
         style="@style/Widget.MaterialComponents.Button.Icon"
         />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/save"
+        android:backgroundTint="@color/button_Color"
+        android:text="Save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signUp_btn"
+        app:icon="@drawable/ic_baseline_save_24"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

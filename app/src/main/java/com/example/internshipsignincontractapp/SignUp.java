@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SignUp extends AppCompatActivity
 {
@@ -29,6 +30,9 @@ public class SignUp extends AppCompatActivity
         setContentView(R.layout.sign_up);
         labelAccountType = findViewById(R.id.menu);
         accountInput = findViewById(R.id.acc_input);
+        username = findViewById(R.id.usernameInput);
+        password = findViewById(R.id.PasswordInput);
+        email = findViewById(R.id.email_input);
         ArrayList<String>options = new ArrayList<>();
         options.add("Student");
         options.add("Mentor");
@@ -44,6 +48,34 @@ public class SignUp extends AppCompatActivity
     }
 
     public void SignUpPressed(View view) {
-        MainActivity.dbConnector.addUser(new Users("test","3","t"));
+        Intent intent;
+        MainActivity.dbConnector.addUser(
+                new Users(Objects.requireNonNull(username.getText()).toString()
+                ,Objects.requireNonNull(password.getText().toString()),
+                Objects.requireNonNull(email.getText().toString())),
+                Objects.requireNonNull(accountInput.getText().toString()));
+        if(accountInput.getText().toString().equals("Student")){
+            intent= new Intent(this,LogedInActivity.class);
+            startActivity(intent);
+        }
+        else{
+            if(accountInput.getText().toString().equals("Mentor")){
+                intent= new Intent(this,MainPageMentor.class);
+                startActivity(intent);
+            }
+            else{
+                if(accountInput.getText().toString().equals("Admin")){
+                    intent= new Intent(this,MainPageAdmin.class);
+                    startActivity(intent);
+                }
+                else{
+                    if(accountInput.getText().toString().equals("Firm")){
+                        intent= new Intent(this,MainPageCompany.class);
+                        startActivity(intent);
+                    }
+                }
+            }
+        }
+
     }
 }
