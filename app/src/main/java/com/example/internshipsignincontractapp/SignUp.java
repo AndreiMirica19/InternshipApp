@@ -9,8 +9,7 @@ import android.widget.AutoCompleteTextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.internshipsignincontractapp.Model.DbConnector;
-import com.example.internshipsignincontractapp.Model.Users;
+import com.example.internshipsignincontractapp.Model.Students;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -50,7 +49,7 @@ public class SignUp extends AppCompatActivity
     public void SignUpPressed(View view) {
         Intent intent;
         MainActivity.dbConnector.addUser(
-                new Users(Objects.requireNonNull(username.getText()).toString()
+                new Students(Objects.requireNonNull(username.getText()).toString()
                 ,Objects.requireNonNull(password.getText().toString()),
                 Objects.requireNonNull(email.getText().toString())),
                 Objects.requireNonNull(accountInput.getText().toString()));

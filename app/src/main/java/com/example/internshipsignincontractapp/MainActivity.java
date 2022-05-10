@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         loginIntent = new Intent(this,LogedInActivity.class);
         signUpIntent = new Intent(this,SignUp.class);
-        dbConnector = new DbConnector();
+        dbConnector = DbConnector.getInstance();
 
 
     }

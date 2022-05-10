@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".edit_account_student_fragment"
+    android:background="#F2D0A4"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:text="@string/edit_profile"
+        android:textSize="60dp"
+        android:textColor="@color/text_Color"
+        android:fontFamily="@font/fredokaone_regular"
+        app:layout_constraintBottom_toTopOf="@id/nameInputLayout"
+        app:layout_constraintStart_toStartOf="parent" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:hint="Name"
+        android:id="@+id/nameInputLayout"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="164dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:flow_horizontalBias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:fontFamily="@font/fredokaone_regular"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_student_name"
+            android:textColor="@color/text_Color"
+            android:drawableEnd="@drawable/ic_username"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:hint="University group"
+        android:id="@+id/groupInputLayout"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:flow_horizontalBias="0.0"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameInputLayout"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:fontFamily="@font/fredokaone_regular"
+            android:layout_height="wrap_content"
+            android:id="@+id/uni_group"
+            android:textColor="@color/text_Color"
+            android:drawableEnd="@drawable/ic_baseline_group_24"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:id="@+id/signUp_btn"
+        android:backgroundTint="@color/button_Color"
+        android:text="@string/attach_cv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/groupInputLayout"
+        app:icon="@drawable/ic_baseline_attach_file_24"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/save"
+        android:backgroundTint="@color/button_Color"
+        android:text="@string/save"
+        android:onClick="SavePressed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signUp_btn"
+        app:icon="@drawable/ic_baseline_save_24"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

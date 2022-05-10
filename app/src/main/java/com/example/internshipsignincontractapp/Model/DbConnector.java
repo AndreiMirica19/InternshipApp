@@ -6,11 +6,8 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -23,8 +20,10 @@ public class DbConnector {
     public FirebaseFirestore db ;
     public DatabaseReference students;
     public CollectionReference collectionReference;
-    public List<Users> UserList = new ArrayList<>();
-    public DbConnector() {
+    public List<Students> studentList = new ArrayList<>();
+    private Students currentUser;
+    private static DbConnector dbConnector;
+    private DbConnector() {
 
        db= FirebaseFirestore.getInstance();
        collectionReference=db.collection("Students");
@@ -34,7 +33,9 @@ public class DbConnector {
                if (task.isSuccessful()) {
                    
                    for (QueryDocumentSnapshot document : task.getResult()) {
-                       UserList.add(new Users(document.getString("name"),document.getString("password"),document.getString("email")));
+                      Students s = new Students(document.getString("name"),document.getString("password"),document.getString("email"));
+                      s.setId(document.getId());
+                       studentList.add(s);
                    }
 
                } else {
@@ -46,21 +47,35 @@ public class DbConnector {
 
 
     }
-    public void addUser(Users user,String accountType){
-        DocumentReference newUser = db.collection("Students").document();
+    public void addUser(Students user, String accountType){
+
         HashMap <String,String>userMap = new HashMap();
         userMap.put("name",user.name);
         userMap.put("password",user.password);
         userMap.put("email",user.email);
+        currentUser = user;
         db.collection(accountType+"s").add(userMap);
     }
+    public void updateStudent(String name,String group){
+        db.collection("Students").document(currentUser.id).update("name",name);
+        db.collection("Students").document(currentUser.id).update("group",group);
+    }
+
     public Boolean credentialsValidator(String username,String password){
-        for( Users u :UserList) {
+        for( Students u :studentList) {
             if (username.equals(u.getName()) && password.equals(u.getPassword())) {
+                currentUser = u;
                return  true;
             }
         }
         return false;
+    }
+    public static DbConnector getInstance(){
+        if (dbConnector == null){
+            dbConnector = new DbConnector();
+
+        }
+        return dbConnector;
     }
 
 }

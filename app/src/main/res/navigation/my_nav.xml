@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/main_page_student_fragment">
+
+    <fragment
+        android:id="@+id/sign_convention_student"
+        android:name="com.example.internshipsignincontractapp.sign_convention_student"
+        android:label="fragment_sign_convention_student"
+        tools:layout="@layout/fragment_sign_convention_student" />
+    <fragment
+        android:id="@+id/edit_account_student_fragment"
+        android:name="com.example.internshipsignincontractapp.edit_account_student_fragment"
+        android:label="fragment_edit_account_student_fragment"
+        tools:layout="@layout/fragment_edit_account_student_fragment" />
+    <fragment
+        android:id="@+id/main_page_student_fragment"
+        android:name="com.example.internshipsignincontractapp.main_page_student_fragment"
+        android:label="fragment_main_page_student_fragment"
+        tools:layout="@layout/fragment_main_page_student_fragment" />
+</navigation>
