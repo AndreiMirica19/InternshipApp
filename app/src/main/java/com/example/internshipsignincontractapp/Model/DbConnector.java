@@ -21,7 +21,7 @@ public class DbConnector {
     public DatabaseReference students;
     public CollectionReference collectionReference;
     public List<Students> studentList = new ArrayList<>();
-    private Students currentUser;
+    public Students currentUser;
     private static DbConnector dbConnector;
     private DbConnector() {
 
@@ -35,6 +35,8 @@ public class DbConnector {
                    for (QueryDocumentSnapshot document : task.getResult()) {
                       Students s = new Students(document.getString("name"),document.getString("password"),document.getString("email"));
                       s.setId(document.getId());
+                      if (document.getString("group")!= null)
+                          s.setGroup(document.getString("group"));
                        studentList.add(s);
                    }
 

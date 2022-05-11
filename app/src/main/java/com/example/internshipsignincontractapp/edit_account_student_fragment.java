@@ -2,6 +2,8 @@ package com.example.internshipsignincontractapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -9,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.internshipsignincontractapp.Model.DbConnector;
+import com.google.android.material.textfield.TextInputEditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,15 +66,23 @@ public class edit_account_student_fragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        TextInputEditText name = view.findViewById(R.id.edit_student_name);
+        TextInputEditText uniGroup = view.findViewById(R.id.uni_group);
+        DbConnector dbConnector = DbConnector.getInstance();
+        name.setText(dbConnector.currentUser.getName());
+        uniGroup.setText(dbConnector.currentUser.getGroup());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.edit_account_student,
-                container, false);
-        Button save_btn = view.findViewById(R.id.save);
-        save_btn.setOnClickListener(view1 ->{
-            Log.d("Test","Merge");
-        } );
+
+
+
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_edit_account_student_fragment, container, false);
     }
 
