@@ -5,8 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.internshipsignincontractapp.Model.DbConnector;
 
 public class MainPageCompanyFragment extends Fragment {
     private String mParam1;
@@ -34,6 +39,16 @@ public class MainPageCompanyFragment extends Fragment {
         }
 
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        DbConnector dbConnector =DbConnector.getInstance();
+        ListView listView = view.findViewById(R.id.listView);
+        dbConnector.fetchCompanyInternships();
+        CandidatesAdapter candidatesAdapter = new CandidatesAdapter(getContext(),R.layout.candidates_adapter,dbConnector.currentCompanyCandidates);
+         listView.setAdapter(candidatesAdapter);
     }
 
     @Override

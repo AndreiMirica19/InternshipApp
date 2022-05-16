@@ -1,11 +1,14 @@
 package com.example.internshipsignincontractapp.Model;
 
+import java.util.ArrayList;
+
 public class Internship {
     private String offer;
     private String skills;
     private String salary;
     private String company;
     private String id;
+    private ArrayList<String>candidatesId;
 
     public String getId() {
         return id;
@@ -59,5 +62,13 @@ public class Internship {
 
     public void setSalary(String salary) {
         this.salary = salary;
+    }
+
+    public ArrayList<String> getCandidatesId() {
+        return candidatesId;
+    }
+
+    public void setCandidatesId(ArrayList<String> candidatesId) {
+        this.candidatesId = candidatesId;
     }
 }
