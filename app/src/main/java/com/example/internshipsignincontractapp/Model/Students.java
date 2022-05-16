@@ -1,10 +1,7 @@
 package com.example.internshipsignincontractapp.Model;
 
-public class Students {
-    String name;
-    String password;
-    String email;
-    String id;
+public class Students extends Account {
+
     String group;
 
     public String getGroup() {

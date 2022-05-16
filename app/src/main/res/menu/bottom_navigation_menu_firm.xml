@@ -6,17 +6,23 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/home"/>
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/add_internship"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="@string/add_internhip"
+        />
+    <item
+        android:id="@+id/update_firm"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_groups_2_24"
         android:title="@string/update_firm"/>
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/Sign_Convention"
         android:enabled="true"
         android:icon="@drawable/ic_update_profile"
         android:title="@string/sign_convention"/>
     <item
-        android:id="@+id/page_3"
+        android:id="@+id/Log_Out"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_exit_to_app_24"
         android:title="@string/log_out"/>

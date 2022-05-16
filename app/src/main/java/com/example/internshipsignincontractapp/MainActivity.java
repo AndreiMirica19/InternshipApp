@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.internshipsignincontractapp.Model.Company;
 import com.example.internshipsignincontractapp.Model.DbConnector;
+import com.example.internshipsignincontractapp.Model.Students;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         password= findViewById(R.id.password);
 
         loginIntent = new Intent(this,LogedInActivity.class);
+
         signUpIntent = new Intent(this,SignUp.class);
         dbConnector = DbConnector.getInstance();
 
@@ -39,10 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void LogInPressed(View view) {
         //
-
+       Intent loginCompanyIntent = new Intent(this,MainPageCompany.class);
         if(dbConnector.credentialsValidator(username.getText().toString(),password.getText().toString())){
-
+            if(dbConnector.currentUser instanceof Students)
             startActivity(loginIntent);
+            else
+                if(dbConnector.currentUser instanceof Company)
+                    startActivity(loginCompanyIntent);
+
         }
         //
 

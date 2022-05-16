@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.internshipsignincontractapp.Model.DbConnector;
+import com.example.internshipsignincontractapp.Model.Students;
 import com.google.android.material.textfield.TextInputEditText;
 
 /**
@@ -71,8 +72,9 @@ public class edit_account_student_fragment extends Fragment {
         TextInputEditText name = view.findViewById(R.id.edit_student_name);
         TextInputEditText uniGroup = view.findViewById(R.id.uni_group);
         DbConnector dbConnector = DbConnector.getInstance();
-        name.setText(dbConnector.currentUser.getName());
-        uniGroup.setText(dbConnector.currentUser.getGroup());
+        Students currentStudent = (Students) dbConnector.currentUser;
+        name.setText(currentStudent.getName());
+        uniGroup.setText(currentStudent.getGroup());
     }
 
     @Override

@@ -21,7 +21,9 @@ public class DbConnector {
     public DatabaseReference students;
     public CollectionReference collectionReference;
     public List<Students> studentList = new ArrayList<>();
-    public Students currentUser;
+    List<Company>companyList = new ArrayList<>();
+   public List<Internship>internshipList = new ArrayList<>();
+    public Account currentUser;
     private static DbConnector dbConnector;
     private DbConnector() {
 
@@ -33,6 +35,7 @@ public class DbConnector {
                if (task.isSuccessful()) {
                    
                    for (QueryDocumentSnapshot document : task.getResult()) {
+
                       Students s = new Students(document.getString("name"),document.getString("password"),document.getString("email"));
                       s.setId(document.getId());
                       if (document.getString("group")!= null)
@@ -44,8 +47,46 @@ public class DbConnector {
                    Log.d("TAG1", "Error getting documents: ");
                }
            }
-       });;
+       });
+        collectionReference=db.collection("Firms");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
 
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+                       Company s = new Company(document.getString("name"),document.getString("password"),document.getString("email"));
+                        s.setId(document.getId());
+
+                        companyList.add(s);
+                    }
+
+                } else {
+                    Log.d("TAG1", "Error getting documents: ");
+                }
+            }
+        });
+        collectionReference=db.collection("Internships");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Internship i = new Internship(document.getString("Offer"),
+                                document.getString("Skills"),document.getString("salary"),document.getString("Company"));
+                        i.setId(document.getId());
+                       internshipList.add(i);
+
+
+                    }
+
+                } else {
+                    Log.d("TAG1", "Error getting documents: ");
+                }
+            }
+        });
 
 
     }
@@ -70,6 +111,12 @@ public class DbConnector {
                return  true;
             }
         }
+        for( Company u :companyList) {
+            if (username.equals(u.getName()) && password.equals(u.getPassword())) {
+                currentUser = u;
+                return  true;
+            }
+        }
         return false;
     }
     public static DbConnector getInstance(){
@@ -80,4 +127,14 @@ public class DbConnector {
         return dbConnector;
     }
 
+    public void addInternship(Internship internship) {
+        HashMap <String,String>userMap = new HashMap();
+        userMap.put("Offer",internship.getOffer());
+        userMap.put("Skills", internship.getSkills());
+        userMap.put("salary",internship.getSalary());
+        userMap.put("Company",internship.getCompany());
+
+        db.collection("Internships").add(userMap);
+
+    }
 }
