@@ -29,6 +29,7 @@ public class LogedInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.main_page_student);
 
         bottomNavigationMenuView = (BottomNavigationView) findViewById(R.id.bottom_navigation);

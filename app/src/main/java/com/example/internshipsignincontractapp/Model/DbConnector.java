@@ -15,6 +15,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class DbConnector {
     public FirebaseFirestore db ;
@@ -27,6 +28,7 @@ public class DbConnector {
     public  Internship currentInternship;
     public ArrayList<Candidate> currentCompanyCandidates=new ArrayList<>();
     private static DbConnector dbConnector;
+    public ArrayList<PenddingOffers> conventionOffers;
     private DbConnector() {
 
        db= FirebaseFirestore.getInstance();
@@ -203,6 +205,46 @@ public class DbConnector {
        c.put("id",candidate.getId());
        offers.add(c);
         db.collection("Internships").document(currentInternship.getId()).update("Pending Offers",offers);
+
+    }
+    public void fetchUserPendingOffers(){
+        conventionOffers = new ArrayList<>();
+        for(Internship i:internshipList) {
+            String company = i.getCompany();
+            String position = i.getOffer();
+            String salary = i.getSalary();
+            String skills = i.getSkills();
+            if (i.getCandidatesId() != null && i.getPendingOffers() != null) {
+
+                for (HashMap<String, String> j : i.getPendingOffers()) {
+
+
+
+                        if (Objects.equals(j.get("id"), currentUser.id) && Objects.equals(j.get("Status"), "Waiting for student's response"))
+                            conventionOffers.add(new PenddingOffers(company, salary, position, skills));
+
+                }
+            }
+        }
+    }
+    public void sendConventionToMentor(int index){
+        if(conventionOffers!=null){
+         PenddingOffers convention =   conventionOffers.get(index);
+            for(Internship i:internshipList) {
+                if(convention.getCompany().equals(i.getCompany())&&convention.getPosition().equals(i.getOffer())){
+                    for (HashMap<String, String> j : i.getPendingOffers()) {
+
+
+
+                        if (Objects.equals(j.get("id"), currentUser.id) && Objects.equals(j.get("Status"), "Waiting for student's response"))
+                            j.replace("Status","Waiting for mentor's response");
+
+                    }
+                    db.collection("Internships").document(i.getId()).update("Pending Offers",i.getPendingOffers());
+                }
+            }
+
+        }
 
     }
 }

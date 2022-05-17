@@ -52,12 +52,14 @@
 
     </LinearLayout>
         <ListView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
             android:layout_width="match_parent"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="20dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:id="@+id/listView"
-            android:layout_height="match_parent"
+            android:layout_height="530dp"
             tools:listitem="Test"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
