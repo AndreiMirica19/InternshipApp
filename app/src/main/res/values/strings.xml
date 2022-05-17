@@ -32,4 +32,5 @@
     <string name="skills">Skills:</string>
     <string name="apply">apply</string>
     <string name="accept">Accept</string>
+    <string name="reject">reject</string>
 </resources>

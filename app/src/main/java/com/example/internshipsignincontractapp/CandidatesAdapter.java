@@ -29,7 +29,7 @@ public class CandidatesAdapter  extends ArrayAdapter<Candidate> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
+       DbConnector dbConnector = DbConnector.getInstance();
         String name =getItem(position).getName() ;
         String pos = getItem(position).getPosition();
         String group = getItem(position).getGroup();
@@ -38,11 +38,18 @@ public class CandidatesAdapter  extends ArrayAdapter<Candidate> {
         TextView company = convertView.findViewById(R.id.candidate_name);
         TextView job_position = convertView.findViewById(R.id.position);
         TextView groupText =convertView.findViewById(R.id.faculty);
-        Button btn = convertView.findViewById(R.id.apply_btn);
+        Button btn = convertView.findViewById(R.id.accept_btn);
+        Button deleteBtn =convertView.findViewById(R.id.reject_btn);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 dbConnector.deleteCandidate(position);
+            }
+        });
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+              dbConnector.sendOffer(position);
             }
         });
         company.setText(name);

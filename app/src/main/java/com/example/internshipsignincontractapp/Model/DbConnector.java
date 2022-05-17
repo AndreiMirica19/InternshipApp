@@ -24,6 +24,7 @@ public class DbConnector {
     List<Company>companyList = new ArrayList<>();
    public List<Internship>internshipList = new ArrayList<>();
     public Account currentUser;
+    public  Internship currentInternship;
     public ArrayList<Candidate> currentCompanyCandidates=new ArrayList<>();
     private static DbConnector dbConnector;
     private DbConnector() {
@@ -79,8 +80,11 @@ public class DbConnector {
                                 document.getString("Skills"),document.getString("salary"),document.getString("Company"));
                         i.setId(document.getId());
                       ArrayList<String>apply= (ArrayList<String>) document.get("Candidates");
+
+                      ArrayList<HashMap<String,String>> a = (ArrayList) document.get("Pending Offers");
+                      i.setPendingOffers(a);
                       i.setCandidatesId(apply);
-                      Log.d("test",apply.toString());
+                     // Log.d("test",apply.toString());
                        internshipList.add(i);
 
 
@@ -113,6 +117,7 @@ public class DbConnector {
         for( Students u :studentList) {
             if (username.equals(u.getName()) && password.equals(u.getPassword())) {
                 currentUser = u;
+
                return  true;
             }
         }
@@ -145,12 +150,18 @@ public class DbConnector {
     private Candidate getCandidate(String id,String position){
         for(Students student:studentList){
             if(student.getId().equals(id))
-                return new Candidate(student.name,position,student.group);
+                return new Candidate(student.name,position,student.group,student.id);
         }
         return  null;
     }
     public void applyToInternship(Internship internship){
-        ArrayList<String>studentsId = internship.getCandidatesId();
+        ArrayList<String>studentsId ;
+        if(internship.getCandidatesId()==null){
+            studentsId = new ArrayList<String>();
+        }
+       else
+           studentsId = internship.getCandidatesId();
+
         studentsId.add(currentUser.id);
         db.collection("Internships").document(internship.getId()).update("Candidates",studentsId);
     }
@@ -164,5 +175,34 @@ public class DbConnector {
                 }
             }
         }
+    }
+    public void deleteCandidate(int index){
+       Candidate candidate= currentCompanyCandidates.get(index);
+        ArrayList<String>studentsId ;
+        Company c =(Company) currentUser;
+        for (Internship i:internshipList){
+            if(i.getCompany().equals(c.getName())){
+                for(String cand:i.getCandidatesId()){
+                    if(candidate.getId().equals(cand))
+                    currentInternship = i;
+                }
+            }
+        }
+        studentsId = currentInternship.getCandidatesId();
+       studentsId.remove(candidate.getId());
+        db.collection("Internships").document(currentInternship.getId()).update("Candidates",studentsId);
+
+
+    }
+    public void sendOffer(int index){
+        Candidate candidate= currentCompanyCandidates.get(index);
+        deleteCandidate(index);
+       ArrayList<HashMap<String,String>> offers= currentInternship.getPendingOffers();
+       HashMap<String,String>c = new HashMap<String,String>();
+       c.put("Status","Waiting for student's response");
+       c.put("id",candidate.getId());
+       offers.add(c);
+        db.collection("Internships").document(currentInternship.getId()).update("Pending Offers",offers);
+
     }
 }

@@ -1,6 +1,7 @@
 package com.example.internshipsignincontractapp.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Internship {
     private String offer;
@@ -9,6 +10,15 @@ public class Internship {
     private String company;
     private String id;
     private ArrayList<String>candidatesId;
+    private ArrayList<HashMap<String,String>>pendingOffers = new ArrayList<>();
+
+    public ArrayList<HashMap<String, String>> getPendingOffers() {
+        return pendingOffers;
+    }
+
+    public void setPendingOffers(ArrayList<HashMap<String, String>> pendingOffers) {
+        this.pendingOffers = pendingOffers;
+    }
 
     public String getId() {
         return id;

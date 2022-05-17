@@ -2,6 +2,7 @@ package com.example.internshipsignincontractapp;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -46,6 +47,8 @@ public class MainPageCompanyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         DbConnector dbConnector =DbConnector.getInstance();
         ListView listView = view.findViewById(R.id.listView);
+
+
         dbConnector.fetchCompanyInternships();
         CandidatesAdapter candidatesAdapter = new CandidatesAdapter(getContext(),R.layout.candidates_adapter,dbConnector.currentCompanyCandidates);
          listView.setAdapter(candidatesAdapter);
