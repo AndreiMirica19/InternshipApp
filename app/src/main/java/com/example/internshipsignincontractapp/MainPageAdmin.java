@@ -3,6 +3,7 @@ package com.example.internshipsignincontractapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
@@ -30,8 +31,8 @@ public class MainPageAdmin  extends AppCompatActivity {
                 case R.id.page_home:
                     replaceFragment(new company_List_fragment());
                     break;
-                case R.id.status:
-                    replaceFragment(new status_List_fragment());
+                case R.id.account_creation:
+                    replaceFragment(new sign_up_fragment());
                     break;
                 case R.id.Log_Out:
                     AlertDialog alertDialog = new AlertDialog.Builder(MainPageAdmin.this).create();
@@ -62,5 +63,8 @@ public class MainPageAdmin  extends AppCompatActivity {
         fragmentTransaction.commit();
 
 
+    }
+    public void SignUpPressed(View view){
+          sign_up_fragment.SignUpPressed(view);
     }
 }

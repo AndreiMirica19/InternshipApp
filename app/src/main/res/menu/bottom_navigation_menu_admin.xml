@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/home"/>
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/account_creation"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_add_24"
         android:title="@string/create_account"/>
