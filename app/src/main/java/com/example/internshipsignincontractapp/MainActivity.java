@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.internshipsignincontractapp.Model.Company;
 import com.example.internshipsignincontractapp.Model.DbConnector;
+import com.example.internshipsignincontractapp.Model.Mentor;
 import com.example.internshipsignincontractapp.Model.Students;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -50,7 +51,12 @@ public class MainActivity extends AppCompatActivity {
             else
                 if(dbConnector.currentUser instanceof Company)
                     startActivity(loginCompanyIntent);
-
+          else{
+                    if(dbConnector.currentUser instanceof Mentor){
+                        Intent intent = new Intent(this,MainPageMentor.class);
+                        startActivity(intent);
+                    }
+                }
         }
         //
 

@@ -6,6 +6,34 @@ public class Candidate {
     private String group;
     private String id;
     private String status="applied";
+    private String salary;
+   private  String skills;
+ private String company;
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getSkills() {
+        return skills;
+    }
+
+    public void setSkills(String skills) {
+        this.skills = skills;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
     public String getId() {
         return id;
     }

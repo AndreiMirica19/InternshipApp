@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Candidate name"
+        android:id="@+id/candidate_name"
+        android:textColor="@color/text_Color"
+        android:fontFamily="@font/fredokaone_regular"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/candidate_name"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Group"
+        android:id="@+id/candidate_group"
+        android:textColor="@color/text_Color"
+        android:fontFamily="@font/fredokaone_regular"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/candidate_group"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Company Name"
+        android:id="@+id/companyName"
+        android:textColor="@color/text_Color"
+        android:fontFamily="@font/fredokaone_regular"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/companyName"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Possition"
+        android:id="@+id/position"
+        android:textColor="@color/text_Color"
+        android:fontFamily="@font/fredokaone_regular"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/companyName"
+        app:layout_constraintStart_toStartOf="@id/position"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="20dp"
+        android:text="Salary"
+        android:id="@+id/salaryLabel"
+        android:textColor="@color/text_Color"
+        android:fontFamily="@font/fredokaone_regular"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/companyName"
+        app:layout_constraintStart_toEndOf="@id/salaryLabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="100$"
+        android:id="@+id/salary_input"
+        android:textColor="@color/text_Color"
+        android:fontFamily="@font/fredokaone_regular"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/position"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/Skills"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/skills"
+        android:textColor="@color/text_Color"
+        android:fontFamily="@font/fredokaone_regular"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/position"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@id/Skills"
+        android:text="Java,c++"
+        android:id="@+id/skillEnum"
+        android:textColor="@color/text_Color"
+        android:fontFamily="@font/fredokaone_regular"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintTop_toBottomOf="@id/Skills"
+        android:id="@+id/apply_btn"
+        android:text="@string/sign_convention"
+        android:backgroundTint="@color/button_Color"
+        app:icon="@drawable/ic_baseline_add_24"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

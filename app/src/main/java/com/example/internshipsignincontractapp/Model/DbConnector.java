@@ -29,6 +29,8 @@ public class DbConnector {
     public ArrayList<Candidate> currentCompanyCandidates=new ArrayList<>();
     private static DbConnector dbConnector;
     public ArrayList<PenddingOffers> conventionOffers;
+    public ArrayList<Mentor>mentors=new ArrayList<>();
+    public List<Candidate>mentorCandidates=new ArrayList<>();
     private DbConnector() {
 
        db= FirebaseFirestore.getInstance();
@@ -98,7 +100,26 @@ public class DbConnector {
                 }
             }
         });
+        collectionReference=db.collection("Mentors");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
 
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Mentor m = new Mentor(document.getString("name"),document.getString("password"),document.getString("email"));
+                        m.setId(document.getId());
+                        mentors.add(m);
+
+
+
+                    }
+
+                } else {
+                    Log.d("TAG1", "Error getting documents: ");
+                }
+            }
+        });
 
     }
     public void addUser(Students user, String accountType){
@@ -126,6 +147,14 @@ public class DbConnector {
         for( Company u :companyList) {
             if (username.equals(u.getName()) && password.equals(u.getPassword())) {
                 currentUser = u;
+                return  true;
+            }
+        }
+        for( Mentor u :mentors) {
+
+            if (username.equals(u.getName()) && password.equals(u.getPassword())) {
+                currentUser = u;
+
                 return  true;
             }
         }
@@ -244,6 +273,43 @@ public class DbConnector {
                 }
             }
 
+        }
+
+    }
+    private  Students getStudent(String id){
+        for(Students s:studentList){
+            if(s.getId().equals(id))
+                return s;
+        }
+        return null;
+    }
+    public void setMentorStudentList(){
+        for(Internship i:internshipList){
+            if(i.getPendingOffers()!=null)
+            for (HashMap<String, String> j : i.getPendingOffers()) {
+                if(Objects.equals(j.get("Status"), "Waiting for mentor's response")){
+                     Students s = getStudent(j.get("id"));
+                     if(s!=null){
+                         Candidate c = new Candidate(s.name,i.getOffer(),s.group,s.id);
+                         c.setSalary(i.getSalary());
+                         c.setSkills(i.getSkills());
+                         c.setCompany(i.getCompany());
+                         mentorCandidates.add(c);
+                     }
+                }
+            }
+        }
+    }
+    public void sendConventionToAdmin(int index){
+        for(Internship i:internshipList) {
+            if(mentorCandidates.get(index).getCompany().equals(i.getCompany())&&mentorCandidates.get(index).getPosition().equals(i.getOffer())){
+                if(i.getPendingOffers()!=null)
+                    for (HashMap<String, String> j : i.getPendingOffers()) {
+                        if (Objects.equals(j.get("id"), mentorCandidates.get(index).getId()) && Objects.equals(j.get("Status"), "Waiting for mentor's response"))
+                            j.replace("Status","Waiting for admin's response");
+                    }
+                db.collection("Internships").document(i.getId()).update("Pending Offers",i.getPendingOffers());
+            }
         }
 
     }
