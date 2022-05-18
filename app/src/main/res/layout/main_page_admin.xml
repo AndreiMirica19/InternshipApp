@@ -13,7 +13,7 @@
 
         app:menu="@menu/bottom_navigation_menu_admin" />
     <FrameLayout
-        android:id="@+id/fragmentContainerView_Firm"
+        android:id="@+id/fragmentContainerView_Admin"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="409dp"
         android:layout_height="673dp"

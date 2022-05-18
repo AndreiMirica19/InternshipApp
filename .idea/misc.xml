@@ -9,6 +9,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17835083007812502" />
         <entry key="app/src/main/res/layout/add_internship_fragment.xml" value="0.2875905797101449" />
         <entry key="app/src/main/res/layout/candidates_adapter.xml" value="0.2875905797101449" />
+        <entry key="app/src/main/res/layout/company_list.xml" value="0.2875905797101449" />
+        <entry key="app/src/main/res/layout/company_list_adaptor.xml" value="0.2875905797101449" />
+        <entry key="app/src/main/res/layout/company_update_company_fragment.xml" value="0.2875905797101449" />
         <entry key="app/src/main/res/layout/convention_adapter.xml" value="0.2875905797101449" />
         <entry key="app/src/main/res/layout/edit_account_student.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/layout/editaccount_student.xml" value="0.2875905797101449" />

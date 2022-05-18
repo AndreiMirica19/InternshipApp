@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.internshipsignincontractapp.Model.Admin;
 import com.example.internshipsignincontractapp.Model.Company;
 import com.example.internshipsignincontractapp.Model.DbConnector;
 import com.example.internshipsignincontractapp.Model.Mentor;
@@ -51,12 +52,18 @@ public class MainActivity extends AppCompatActivity {
             else
                 if(dbConnector.currentUser instanceof Company)
                     startActivity(loginCompanyIntent);
-          else{
+          else
                     if(dbConnector.currentUser instanceof Mentor){
                         Intent intent = new Intent(this,MainPageMentor.class);
                         startActivity(intent);
                     }
+
+          else{
+                if(dbConnector.currentUser instanceof Admin){
+                    Intent intent = new Intent(this,MainPageAdmin.class);
+                    startActivity(intent);
                 }
+            }
         }
         //
 

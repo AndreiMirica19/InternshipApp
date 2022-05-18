@@ -32,6 +32,9 @@ public class MainPageCompany extends AppCompatActivity {
                 case R.id.add_internship:
                     replaceFragment(new add_offer_fragment());
                     break;
+                case R.id.update_firm:
+                    replaceFragment(new update_company_info());
+                    break;
                 case R.id.Log_Out:
                     AlertDialog alertDialog = new AlertDialog.Builder(MainPageCompany.this).create();
                     alertDialog.setTitle("Alert");

@@ -30,6 +30,7 @@ public class DbConnector {
     private static DbConnector dbConnector;
     public ArrayList<PenddingOffers> conventionOffers;
     public ArrayList<Mentor>mentors=new ArrayList<>();
+    public ArrayList<Admin>admins = new ArrayList<>();
     public List<Candidate>mentorCandidates=new ArrayList<>();
     private DbConnector() {
 
@@ -64,7 +65,12 @@ public class DbConnector {
 
                        Company s = new Company(document.getString("name"),document.getString("password"),document.getString("email"));
                         s.setId(document.getId());
-
+                       if(document.getString("adress")!=null){
+                           s.setAdress(document.getString("adress"));
+                       }
+                       if(document.getString("description")!=null){
+                           s.setDescription(document.getString("description"));
+                       }
                         companyList.add(s);
                     }
 
@@ -120,6 +126,26 @@ public class DbConnector {
                 }
             }
         });
+        collectionReference=db.collection("Admins");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Admin m = new Admin(document.getString("name"),document.getString("password"),document.getString("email"));
+                        m.setId(document.getId());
+                        admins.add(m);
+
+
+
+                    }
+
+                } else {
+                    Log.d("TAG1", "Error getting documents: ");
+                }
+            }
+        });
 
     }
     public void addUser(Students user, String accountType){
@@ -158,6 +184,15 @@ public class DbConnector {
                 return  true;
             }
         }
+        for( Admin u :admins) {
+
+            if (username.equals(u.getName()) && password.equals(u.getPassword())) {
+                currentUser = u;
+
+                return  true;
+            }
+        }
+
         return false;
     }
     public static DbConnector getInstance(){
@@ -311,6 +346,16 @@ public class DbConnector {
                 db.collection("Internships").document(i.getId()).update("Pending Offers",i.getPendingOffers());
             }
         }
+
+    }
+
+    public void updateAdress(String name, String adress, String description) {
+        db.collection("Firms").document(currentUser.id).update("name",name);
+        db.collection("Firms").document(currentUser.id).update("adress",adress);
+        db.collection("Firms").document(currentUser.id).update("description",description);
+        String id = currentUser.id;
+        currentUser = new Company(name,currentUser.password,currentUser.email);
+        currentUser.setId(id);
 
     }
 }
