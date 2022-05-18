@@ -24,14 +24,14 @@ public class MainPageAdmin  extends AppCompatActivity {
         setContentView(R.layout.main_page_admin);
         getSupportActionBar().hide();
         bottomNavigationMenuView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        navHostController = findViewById(R.id.fragmentContainerView_Mentor);
+        navHostController = findViewById(R.id.fragmentContainerView_Admin);
         bottomNavigationMenuView.setOnNavigationItemSelectedListener(item->{
             switch (item.getItemId()){
                 case R.id.page_home:
                     replaceFragment(new company_List_fragment());
                     break;
-                case R.id.add_internship:
-                    replaceFragment(new add_offer_fragment());
+                case R.id.status:
+                    replaceFragment(new status_List_fragment());
                     break;
                 case R.id.Log_Out:
                     AlertDialog alertDialog = new AlertDialog.Builder(MainPageAdmin.this).create();
@@ -58,7 +58,7 @@ public class MainPageAdmin  extends AppCompatActivity {
     private  void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainerView_Firm,fragment);
+        fragmentTransaction.replace(R.id.fragmentContainerView_Admin,fragment);
         fragmentTransaction.commit();
 
 

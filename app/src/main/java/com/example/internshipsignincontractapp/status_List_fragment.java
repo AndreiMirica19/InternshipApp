@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.internshipsignincontractapp.Model.DbConnector;
 
-public class company_List_fragment extends Fragment {
+public class status_List_fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -23,7 +23,7 @@ public class company_List_fragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Button save_btn;
-    public company_List_fragment() {
+    public status_List_fragment() {
         // Required empty public constructor
     }
 
@@ -36,8 +36,8 @@ public class company_List_fragment extends Fragment {
      * @return A new instance of fragment main_page_student_fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static company_List_fragment newInstance(String param1, String param2) {
-        company_List_fragment fragment = new company_List_fragment();
+    public static status_List_fragment newInstance(String param1, String param2) {
+        status_List_fragment fragment = new status_List_fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,8 +61,8 @@ public class company_List_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         DbConnector dbConnector =DbConnector.getInstance();
         ListView listView = view.findViewById(R.id.listView);
-        dbConnector.setMentorStudentList();
-        CompanyAdapter adapter = new  CompanyAdapter(getContext(),R.layout.company_list_adaptor,dbConnector.companyList);
+
+        CandidateStatusAdapter adapter = new  CandidateStatusAdapter(getContext(),R.layout.admin_status_adapter,dbConnector.getCandidatesStatus());
         listView.setAdapter(adapter);
     }
 
@@ -70,6 +70,7 @@ public class company_List_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.company_list_fragment, container, false);
+        return inflater.inflate(R.layout.admin_status_fragment, container, false);
     }
+
 }

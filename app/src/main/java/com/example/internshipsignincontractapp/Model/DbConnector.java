@@ -22,7 +22,7 @@ public class DbConnector {
     public DatabaseReference students;
     public CollectionReference collectionReference;
     public List<Students> studentList = new ArrayList<>();
-    List<Company>companyList = new ArrayList<>();
+    public List<Company>companyList = new ArrayList<>();
    public List<Internship>internshipList = new ArrayList<>();
     public Account currentUser;
     public  Internship currentInternship;
@@ -32,6 +32,7 @@ public class DbConnector {
     public ArrayList<Mentor>mentors=new ArrayList<>();
     public ArrayList<Admin>admins = new ArrayList<>();
     public List<Candidate>mentorCandidates=new ArrayList<>();
+
     private DbConnector() {
 
        db= FirebaseFirestore.getInstance();
@@ -357,5 +358,34 @@ public class DbConnector {
         currentUser = new Company(name,currentUser.password,currentUser.email);
         currentUser.setId(id);
 
+    }
+
+    public List<Candidate> getCandidatesStatus() {
+        ArrayList candidates = new ArrayList();
+        for(Internship i:internshipList){
+            if(i.getCandidatesId()!=null)
+            for(String s:i.getCandidatesId()){
+                Students student = getStudent(s);
+                assert student != null;
+                Candidate c = new Candidate(student.name,i.getOffer(),student.group,s);
+                c.setCompany(i.getCompany());
+                c.setSkills(i.getSkills());
+                c.setSalary(i.getSalary());
+                c.setStatus("No response yet");
+                candidates.add(c);
+            }
+            if(i.getPendingOffers()!=null)
+            for (HashMap<String, String> j : i.getPendingOffers()) {
+                Students student = getStudent(j.get("id"));
+                Candidate c = new Candidate(student.name,i.getOffer(),student.group,student.id);
+                c.setCompany(i.getCompany());
+                c.setSkills(i.getSkills());
+                c.setSalary(i.getSalary());
+                c.setStatus(j.get("Status"));
+                candidates.add(c);
+            }
+
+        }
+        return candidates;
     }
 }
