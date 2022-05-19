@@ -149,6 +149,135 @@ public class DbConnector {
         });
 
     }
+    private void refreshDB(){
+        if(studentList!=null)
+        studentList.clear();
+        if(companyList!=null)
+        companyList.clear();
+        if(internshipList!=null)
+        internshipList.clear();
+        if(companyList!=null)
+        companyList.clear();
+        if(conventionOffers!=null)
+        conventionOffers.clear();
+        if(mentors!=null)
+        mentors.clear();
+        if(admins!=null)
+        admins.clear();
+        if(mentorCandidates!=null)
+        mentorCandidates.clear();
+        collectionReference=db.collection("Students");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+                        Students s = new Students(document.getString("name"),document.getString("password"),document.getString("email"));
+                        s.setId(document.getId());
+                        if (document.getString("group")!= null)
+                            s.setGroup(document.getString("group"));
+                        studentList.add(s);
+                    }
+
+                } else {
+                    Log.d("TAG1", "Error getting documents: ");
+                }
+            }
+        });
+        collectionReference=db.collection("Firms");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+                        Company s = new Company(document.getString("name"),document.getString("password"),document.getString("email"));
+                        s.setId(document.getId());
+                        if(document.getString("adress")!=null){
+                            s.setAdress(document.getString("adress"));
+                        }
+                        if(document.getString("description")!=null){
+                            s.setDescription(document.getString("description"));
+                        }
+                        companyList.add(s);
+                    }
+
+                } else {
+                    Log.d("TAG1", "Error getting documents: ");
+                }
+            }
+        });
+        collectionReference=db.collection("Internships");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Internship i = new Internship(document.getString("Offer"),
+                                document.getString("Skills"),document.getString("salary"),document.getString("Company"));
+                        i.setId(document.getId());
+                        ArrayList<String>apply= (ArrayList<String>) document.get("Candidates");
+
+                        ArrayList<HashMap<String,String>> a = (ArrayList) document.get("Pending Offers");
+                        i.setPendingOffers(a);
+                        i.setCandidatesId(apply);
+                        // Log.d("test",apply.toString());
+                        internshipList.add(i);
+
+
+
+                    }
+
+                } else {
+                    Log.d("TAG1", "Error getting documents: ");
+                }
+            }
+        });
+        collectionReference=db.collection("Mentors");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Mentor m = new Mentor(document.getString("name"),document.getString("password"),document.getString("email"));
+                        m.setId(document.getId());
+                        mentors.add(m);
+
+
+
+                    }
+
+                } else {
+                    Log.d("TAG1", "Error getting documents: ");
+                }
+            }
+        });
+        collectionReference=db.collection("Admins");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Admin m = new Admin(document.getString("name"),document.getString("password"),document.getString("email"));
+                        m.setId(document.getId());
+                        admins.add(m);
+
+
+
+                    }
+
+                } else {
+                    Log.d("TAG1", "Error getting documents: ");
+                }
+            }
+        });
+    }
     public void addUser(Students user, String accountType){
 
         HashMap <String,String>userMap = new HashMap();
@@ -157,10 +286,12 @@ public class DbConnector {
         userMap.put("email",user.email);
         currentUser = user;
         db.collection(accountType+"s").add(userMap);
+        refreshDB();
     }
     public void updateStudent(String name,String group){
         db.collection("Students").document(currentUser.id).update("name",name);
         db.collection("Students").document(currentUser.id).update("group",group);
+        refreshDB();
     }
 
     public Boolean credentialsValidator(String username,String password){
@@ -212,7 +343,7 @@ public class DbConnector {
         userMap.put("Company",internship.getCompany());
 
         db.collection("Internships").add(userMap);
-
+       refreshDB();
     }
     private Candidate getCandidate(String id,String position){
         for(Students student:studentList){
@@ -231,11 +362,13 @@ public class DbConnector {
 
         studentsId.add(currentUser.id);
         db.collection("Internships").document(internship.getId()).update("Candidates",studentsId);
+        refreshDB();
     }
     public void fetchCompanyInternships(){
         Company c =(Company) currentUser;
         for (Internship i:internshipList){
             if(i.getCompany().equals(c.getName())){
+                if(i.getCandidatesId()!=null)
                 for(String candidate:i.getCandidatesId()){
 
                     currentCompanyCandidates.add(getCandidate(candidate,i.getOffer()));
@@ -249,6 +382,7 @@ public class DbConnector {
         Company c =(Company) currentUser;
         for (Internship i:internshipList){
             if(i.getCompany().equals(c.getName())){
+                if(i.getCandidatesId()!=null)
                 for(String cand:i.getCandidatesId()){
                     if(candidate.getId().equals(cand))
                     currentInternship = i;
@@ -259,7 +393,7 @@ public class DbConnector {
        studentsId.remove(candidate.getId());
         db.collection("Internships").document(currentInternship.getId()).update("Candidates",studentsId);
 
-
+refreshDB();
     }
     public void sendOffer(int index){
         Candidate candidate= currentCompanyCandidates.get(index);
@@ -275,7 +409,7 @@ public class DbConnector {
        c.put("id",candidate.getId());
        offers.add(c);
         db.collection("Internships").document(currentInternship.getId()).update("Pending Offers",offers);
-
+refreshDB();
     }
     public void fetchUserPendingOffers(){
         conventionOffers = new ArrayList<>();
@@ -311,11 +445,12 @@ public class DbConnector {
 
                     }
                     db.collection("Internships").document(i.getId()).update("Pending Offers",i.getPendingOffers());
+
                 }
             }
 
         }
-
+        refreshDB();
     }
     private  Students getStudent(String id){
         for(Students s:studentList){
@@ -378,6 +513,7 @@ public class DbConnector {
         db.collection("Firms").document(currentUser.id).update("name",name);
         db.collection("Firms").document(currentUser.id).update("adress",adress);
         db.collection("Firms").document(currentUser.id).update("description",description);
+        refreshDB();
         String id = currentUser.id;
         currentUser = new Company(name,currentUser.password,currentUser.email);
         currentUser.setId(id);
@@ -416,13 +552,17 @@ public class DbConnector {
     public void sendConventionToFirm(Candidate c) {
         for(Internship i:internshipList){
             if(i.getCompany().equals(c.getCompany())){
+                if(i.getPendingOffers()!=null)
                 for(HashMap<String, String> j:i.getPendingOffers()){
                     if (Objects.equals(j.get("id"), c.getId()) && Objects.equals(j.get("Status"), "Waiting for admin's response"))
                         j.replace("Status","Waiting for firm's response");
                 }
                 db.collection("Internships").document(i.getId()).update("Pending Offers",i.getPendingOffers());
+
             }
+
         }
+        refreshDB();
     }
 
     public List<Candidate> getFirmStudentConventionList() {
@@ -452,13 +592,15 @@ public class DbConnector {
         for(Internship i:internshipList){
             Log.d("DD",c.getCompany());
             if(i.getCompany().equals(c.getCompany())){
-
+                if(i.getPendingOffers()!=null)
                 for(HashMap<String, String> j:i.getPendingOffers()){
                     if (Objects.equals(j.get("id"), c.getId()) && Objects.equals(j.get("Status"), "Waiting for firm's response"))
                         j.replace("Status","Hired");
                 }
                 db.collection("Internships").document(i.getId()).update("Pending Offers",i.getPendingOffers());
+
             }
         }
+        refreshDB();
     }
 }
