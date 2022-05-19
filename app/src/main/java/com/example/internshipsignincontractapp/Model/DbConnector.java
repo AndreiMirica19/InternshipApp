@@ -264,7 +264,12 @@ public class DbConnector {
     public void sendOffer(int index){
         Candidate candidate= currentCompanyCandidates.get(index);
         deleteCandidate(index);
-       ArrayList<HashMap<String,String>> offers= currentInternship.getPendingOffers();
+        ArrayList<HashMap<String, String>> offers = new ArrayList<>();
+        if(currentInternship.getPendingOffers()!=null) {
+           offers = currentInternship.getPendingOffers();
+        }
+
+
        HashMap<String,String>c = new HashMap<String,String>();
        c.put("Status","Waiting for student's response");
        c.put("id",candidate.getId());
