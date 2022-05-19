@@ -419,4 +419,41 @@ public class DbConnector {
             }
         }
     }
+
+    public List<Candidate> getFirmStudentConventionList() {
+        Company c = (Company) currentUser;
+        ArrayList<Candidate>candidates=new ArrayList<>();
+        for(Internship i:internshipList){
+            if(i.getCompany().equals(c.name)){
+                if(i.getPendingOffers()!=null)
+                    for(HashMap<String, String> j:i.getPendingOffers()){
+                        if(j.get("Status").equals("Waiting for firm's response")){
+                            Students s = getStudent(j.get("id"));
+                            Candidate cand = new Candidate(s.name,i.getOffer(),s.group,s.id);
+                            cand.setSalary(i.getSalary());
+                            cand.setSkills(i.getSkills());
+                            cand.setCompany(i.getCompany());
+                           candidates.add(cand);
+
+                        }
+                    }
+            }
+
+        }
+        return candidates;
+    }
+
+    public void hire(Candidate c) {
+        for(Internship i:internshipList){
+            Log.d("DD",c.getCompany());
+            if(i.getCompany().equals(c.getCompany())){
+
+                for(HashMap<String, String> j:i.getPendingOffers()){
+                    if (Objects.equals(j.get("id"), c.getId()) && Objects.equals(j.get("Status"), "Waiting for firm's response"))
+                        j.replace("Status","Hired");
+                }
+                db.collection("Internships").document(i.getId()).update("Pending Offers",i.getPendingOffers());
+            }
+        }
+    }
 }
