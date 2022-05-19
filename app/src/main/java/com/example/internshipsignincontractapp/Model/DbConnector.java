@@ -336,6 +336,25 @@ public class DbConnector {
             }
         }
     }
+    public List<Candidate>getAdminStudentList(){
+        ArrayList<Candidate>cand = new ArrayList<>();
+        for(Internship i:internshipList){
+            if(i.getPendingOffers()!=null)
+                for (HashMap<String, String> j : i.getPendingOffers()) {
+                    if(Objects.equals(j.get("Status"), "Waiting for admin's response")){
+                        Students s = getStudent(j.get("id"));
+                        if(s!=null){
+                            Candidate c = new Candidate(s.name,i.getOffer(),s.group,s.id);
+                            c.setSalary(i.getSalary());
+                            c.setSkills(i.getSkills());
+                            c.setCompany(i.getCompany());
+                            cand.add(c);
+                        }
+                    }
+                }
+        }
+        return cand;
+    }
     public void sendConventionToAdmin(int index){
         for(Internship i:internshipList) {
             if(mentorCandidates.get(index).getCompany().equals(i.getCompany())&&mentorCandidates.get(index).getPosition().equals(i.getOffer())){
@@ -387,5 +406,17 @@ public class DbConnector {
 
         }
         return candidates;
+    }
+
+    public void sendConventionToFirm(Candidate c) {
+        for(Internship i:internshipList){
+            if(i.getCompany().equals(c.getCompany())){
+                for(HashMap<String, String> j:i.getPendingOffers()){
+                    if (Objects.equals(j.get("id"), c.getId()) && Objects.equals(j.get("Status"), "Waiting for admin's response"))
+                        j.replace("Status","Waiting for firm's response");
+                }
+                db.collection("Internships").document(i.getId()).update("Pending Offers",i.getPendingOffers());
+            }
+        }
     }
 }

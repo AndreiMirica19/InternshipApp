@@ -34,7 +34,13 @@ public class MainPageAdmin  extends AppCompatActivity {
                 case R.id.account_creation:
                     replaceFragment(new sign_up_fragment());
                     break;
-                case R.id.Log_Out:
+                case R.id.status:
+                    replaceFragment(new status_List_fragment());
+                    break;
+                case R.id.convention:
+                    replaceFragment(new convention_admin_fragment());
+                    break;
+                case R.id.page_4:
                     AlertDialog alertDialog = new AlertDialog.Builder(MainPageAdmin.this).create();
                     alertDialog.setTitle("Alert");
                     alertDialog.setMessage("Are you sure you want to log out");

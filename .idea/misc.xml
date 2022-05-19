@@ -30,6 +30,8 @@
         <entry key="app/src/main/res/layout/main_page_mentor_fragment.xml" value="0.17135416666666667" />
         <entry key="app/src/main/res/layout/main_page_student.xml" value="0.1726776123046875" />
         <entry key="app/src/main/res/layout/mentor_adapter.xml" value="0.17135416666666667" />
+        <entry key="app/src/main/res/layout/sign_convention_admin_adapter.xml" value="0.2875905797101449" />
+        <entry key="app/src/main/res/layout/sign_convention_admin_fragment.xml" value="0.2875905797101449" />
         <entry key="app/src/main/res/layout/sign_convention_student.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/layout/sign_up.xml" value="0.27898550724637683" />
         <entry key="app/src/main/res/layout/sign_up_fragment.xml" value="0.2875905797101449" />
