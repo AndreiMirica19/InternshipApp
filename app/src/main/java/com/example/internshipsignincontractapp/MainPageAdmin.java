@@ -26,6 +26,7 @@ public class MainPageAdmin  extends AppCompatActivity {
         getSupportActionBar().hide();
         bottomNavigationMenuView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navHostController = findViewById(R.id.fragmentContainerView_Admin);
+        replaceFragment(new company_List_fragment());
         bottomNavigationMenuView.setOnNavigationItemSelectedListener(item->{
             switch (item.getItemId()){
                 case R.id.page_home:

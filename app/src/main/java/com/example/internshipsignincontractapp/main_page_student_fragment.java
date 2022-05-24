@@ -70,7 +70,7 @@ public class main_page_student_fragment extends Fragment {
         DbConnector dbConnector =DbConnector.getInstance();
         ListView listView = view.findViewById(R.id.listView);
 
-        InternshipAdapter adapter = new InternshipAdapter(getContext(),R.layout.internships_adapter,dbConnector.internshipList);
+        InternshipAdapter adapter = new InternshipAdapter(getContext(),R.layout.internships_adapter,dbConnector.getInternships());
         listView.setAdapter(adapter);
     }
 

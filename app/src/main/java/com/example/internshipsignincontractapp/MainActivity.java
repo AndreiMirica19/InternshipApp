@@ -4,11 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.internshipsignincontractapp.Model.Admin;
 import com.example.internshipsignincontractapp.Model.Company;
@@ -16,8 +13,6 @@ import com.example.internshipsignincontractapp.Model.DbConnector;
 import com.example.internshipsignincontractapp.Model.Mentor;
 import com.example.internshipsignincontractapp.Model.Students;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private Button logInButton;
@@ -35,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         username= findViewById(R.id.username);
         password= findViewById(R.id.password);
 
-        loginIntent = new Intent(this,LogedInActivity.class);
+        loginIntent = new Intent(this, MainPageStudent.class);
 
       //  signUpIntent = new Intent(this,SignUp.class);
         dbConnector = DbConnector.getInstance();

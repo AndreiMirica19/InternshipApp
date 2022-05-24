@@ -293,7 +293,30 @@ public class DbConnector {
         db.collection("Students").document(currentUser.id).update("group",group);
         refreshDB();
     }
-
+    public ArrayList<Internship>getInternships(){
+        ArrayList<Internship>internships = new ArrayList<>();
+        int c = 0;
+        for(Internship i:internshipList){
+            if(i.getPendingOffers()!=null){
+                for(HashMap<String,String> p:i.getPendingOffers()){
+                    if(p.get("id").equals(currentUser.id))
+                        c = 1;
+                }
+            }
+            if(i.getCandidatesId()!=null){
+                for(String s:i.getCandidatesId()){
+                    if(s.equals(currentUser.id)){
+                        c = 1;
+                    }
+                }
+            }
+            if(c==0){
+                internships.add(i);
+            }
+            c = 0;
+        }
+        return internships;
+    }
     public Boolean credentialsValidator(String username,String password){
         for( Students u :studentList) {
             if (username.equals(u.getName()) && password.equals(u.getPassword())) {

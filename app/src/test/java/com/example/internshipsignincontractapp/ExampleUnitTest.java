@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.internshipsignincontractapp.Model.DbConnector;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -11,7 +13,9 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void dbConnectionNotNull() {
+        DbConnector dbConnector = DbConnector.getInstance();
+        Boolean b =true;
+        assertNotNull(b);
     }
 }

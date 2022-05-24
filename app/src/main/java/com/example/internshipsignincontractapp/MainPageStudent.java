@@ -3,7 +3,6 @@ package com.example.internshipsignincontractapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -12,17 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavHostController;
 
 import com.example.internshipsignincontractapp.Model.DbConnector;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class LogedInActivity extends AppCompatActivity {
+public class MainPageStudent extends AppCompatActivity {
     BottomNavigationView bottomNavigationMenuView;
 
     FrameLayout navHostController;
@@ -34,6 +30,7 @@ public class LogedInActivity extends AppCompatActivity {
 
         bottomNavigationMenuView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navHostController = findViewById(R.id.fragmentContainerView);
+        replaceFragment(new main_page_student_fragment());
         bottomNavigationMenuView.setOnNavigationItemSelectedListener(item->{
             switch (item.getItemId()){
                 case R.id.main_page_student_fragment:
@@ -46,12 +43,12 @@ public class LogedInActivity extends AppCompatActivity {
                     replaceFragment(new sign_convention_student());
                     break;
                 case R.id.page_3:
-                    AlertDialog alertDialog = new AlertDialog.Builder(LogedInActivity.this).create();
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainPageStudent.this).create();
                     alertDialog.setTitle("Alert");
                     alertDialog.setMessage("Are you sure you want to log out");
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                             Intent intent = new Intent(LogedInActivity.this,MainActivity.class);
+                             Intent intent = new Intent(MainPageStudent.this,MainActivity.class);
                             startActivity(intent);
                         }
                     });

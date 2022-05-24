@@ -54,7 +54,7 @@ public class SignUp extends AppCompatActivity
                 Objects.requireNonNull(email.getText().toString())),
                 Objects.requireNonNull(accountInput.getText().toString()));
         if(accountInput.getText().toString().equals("Student")){
-            intent= new Intent(this,LogedInActivity.class);
+            intent= new Intent(this, MainPageStudent.class);
             startActivity(intent);
         }
         else{

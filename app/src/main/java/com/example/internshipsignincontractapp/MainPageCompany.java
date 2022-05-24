@@ -21,9 +21,11 @@ public class MainPageCompany extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.main_page_company);
         bottomNavigationMenuView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navHostController = findViewById(R.id.fragmentContainerView_Firm);
+        replaceFragment(new MainPageCompanyFragment());
         bottomNavigationMenuView.setOnNavigationItemSelectedListener(item->{
             switch (item.getItemId()){
                 case R.id.page_home:
